@@ -14,13 +14,13 @@ const CustomBottomTabBar = ({ navigation, route, userDataResponse }) => {
   <Text style={styles.tabText}>Home</Text>
 </TouchableOpacity>
 
-      <TouchableOpacity onPress={() => navigateToScreen('Doctors')} style={styles.tab}>
+      <TouchableOpacity onPress={() => navigateToScreen('Request')} style={styles.tab}>
         <Image source={require('../../assets/icons/doctor.png')} style={styles.icon} />
-        <Text style={styles.tabText}>Doctors</Text>
+        <Text style={styles.tabText}>Patients</Text>
       </TouchableOpacity>
-      <TouchableOpacity onPress={() => navigateToScreen('Pharmacy')} style={styles.tab}>
-        <Image source={require('../../assets/icons/pharmacy.png')} style={styles.icon} />
-        <Text style={styles.tabText}>Pharmacy</Text>
+      <TouchableOpacity onPress={() => navigateToScreen('Consultations')} style={styles.tab}>
+        <Image source={require('../../assets/icons/appointments.png')} style={styles.icon} />
+        <Text style={styles.tabText}>Appointments</Text>
       </TouchableOpacity>
       <TouchableOpacity onPress={() => navigateToScreen('Messages')} style={styles.tab}>
         <Image source={require('../../assets/icons/messages.png')} style={styles.icon} />
@@ -38,7 +38,7 @@ const styles = StyleSheet.create({
   container: {
     position: 'fixed',
     flexDirection: 'row',
-    width: '88%',
+    width: '90%',
     justifyContent: 'space-around',
     alignItems: 'center',
     backgroundColor: '#00B4FE',
@@ -47,8 +47,9 @@ const styles = StyleSheet.create({
     borderRadius: 15,
     height: 80,
     top: 15,
+    bottom: 15,
     marginHorizontal: 20,
-    marginBottom: 20,
+    marginBottom: 30,
   },
   tab: {
     alignItems: 'center',
@@ -59,7 +60,7 @@ const styles = StyleSheet.create({
     marginBottom: 2,
   },
   tabText: {
-    fontSize: 10,
+    fontSize: 8,
     marginTop: 2,
     color: '#fff',
     fontFamily: 'Montserrat',

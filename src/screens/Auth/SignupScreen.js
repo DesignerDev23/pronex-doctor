@@ -13,13 +13,13 @@ const SignupScreen = ({ navigation }) => {
   const [securePassword, setSecurePassword] = useState(true);
   const [secureConfirmPassword, setSecureConfirmPassword] = useState(true);
   const [formData, setFormData] = useState({
-    firstName: '',
-    lastName: '',
-    email: '',
-    phone1: '',
-    password: '',
+    firstName: 'Musa',
+    lastName: 'Abdulkadir',
+    email: 'musa4@mailinator.com',
+    phone1: '09120480564',
+    password: 'abdullahi',
     role: 'doctor',
-    password_confirmation: '', 
+    password_confirmation: 'abdullahi', 
   });
 
   const [validFields, setValidFields] = useState({
@@ -82,16 +82,27 @@ const SignupScreen = ({ navigation }) => {
   
     try {
       const response = await authService.signUp(formData);
-      console.log(response); // Log the response for debugging
-      navigation.navigate('Login'); // Redirect to LoginScreen after Signup
+      console.log('Signup response:', response); // Log response for debugging
+  
+      // Adjust based on actual response structure
+      const token = response.token || response.data.token;
+      if (!token) {
+        throw new Error('Token not found in response');
+      }
+  
+      await authService.storeToken(token); // Store token using authService
+  
+      navigation.navigate('Professional'); // Redirect to Professional screen after Signup
     } catch (error) {
       console.error('Signup error:', error);
       if (error.response) {
-        console.error('Response data:', error.response.data); // Log response data for detailed error
+        console.error('Response data:', error.response.data); // Log detailed error
       }
       // Handle error state or display error message to user
     }
   };
+  
+  
   
   const validateFields = () => {
     const updatedValidFields = {

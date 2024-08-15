@@ -22,6 +22,15 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "plugins": [
+      "expo-font"
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "6cd60e44-5a1a-43aa-85ca-d592b1e4ed57"
+      }
+    },
+    "owner": "designer.dev23"
   }
 }

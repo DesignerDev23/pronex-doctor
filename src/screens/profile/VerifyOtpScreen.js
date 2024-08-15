@@ -5,7 +5,7 @@ import Loader from '../../components/Loader';
 import authService from '../services/authService';
 
 const VerifyOTPScreen = ({ route, navigation }) => {
-  const { userData, channel, contact } = route.params;
+  const { userData, email } = route.params;  // Extract email from route params
   const [otp, setOtp] = useState(['', '', '', '', '', '']);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -15,10 +15,9 @@ const VerifyOTPScreen = ({ route, navigation }) => {
     setLoading(true);
     const otpCode = otp.join('');
     try {
-      const data = await authService.verifyOTP(channel, contact, otpCode);
+      await authService.verifyOTP(email, otpCode, 'email', userData.idNumber); // Pass idNumber here
       setLoading(false);
-      // If OTP verification is successful, navigate to the Profile screen
-      navigation.navigate('Profile', { userData });
+      navigation.navigate('HomeScreen');
     } catch (error) {
       console.error('OTP verification error:', error);
       setError(error);
@@ -26,6 +25,8 @@ const VerifyOTPScreen = ({ route, navigation }) => {
       Alert.alert('Error', 'Failed to verify OTP. Please try again.');
     }
   };
+  
+  
 
   const handleChangeText = (text, index) => {
     const newOtp = [...otp];
@@ -55,7 +56,7 @@ const VerifyOTPScreen = ({ route, navigation }) => {
         </TouchableOpacity>
         <View style={styles.titleContainer}>
           <Text style={styles.heading}>Verify OTP</Text>
-          <Text style={styles.subheading}>We sent a code to your {contact}. Enter the code below for verification</Text>
+          <Text style={styles.subheading}>We sent a code to {email}. Enter the code below for verification</Text>
         </View>
         <View style={styles.formContainer}>
           <View style={styles.otpContainer}>

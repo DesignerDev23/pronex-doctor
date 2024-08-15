@@ -12,7 +12,7 @@ import HomeScreen from '../screens/HomeScreen';
 import ForgotPassword from '../screens/Auth/ForgotPassword';
 import ResetPassword from '../screens/Auth/ResetPassword';
 import CustomBottomTabBar from '../components/CustomBottomTabBar'; // Import the CustomBottomTabBar component
-import DoctorsScreen from '../screens/DoctorsScreen';
+import ConsultationsScreen from '../screens/ConsultationsScreen';
 import PharmacyScreen from '../screens/PharmacyScreen';
 import MessagesScreen from '../screens/MessagesScreen';
 import ProfileScreen from '../screens/ProfileScreen';
@@ -35,6 +35,9 @@ import TermsAndCondition from '../screens/profile/TermsAndCondition';
 import FindDoctorScreen from '../screens/FindDoctorScreen';
 import LabTestScreen from '../screens/LabTestScreen';
 import BuyMedicationScreen from '../screens/BuyMedicationScreen';
+import RequestScreen from '../screens/RequestScreen';
+import PatientDetailsScreen from '../screens/PatientDetailsScreen';
+import ProfessionalScreen from '../screens/Auth/ProfessionalScreen';
 
 
 
@@ -55,7 +58,7 @@ const AppNavigator = () => {
       <Stack.Screen name="BookAppointment" component={BookAppointmentScreen} />
       {/* Add the screens for the tabs */}
       {/* <Stack.Screen name="Home" component={HomeScreen} /> */}
-      <Stack.Screen name="Doctors" component={DoctorsScreen} />
+      <Stack.Screen name="Request" component={RequestScreen} />
       <Stack.Screen name="Pharmacy" component={PharmacyScreen} />
       <Stack.Screen name="Messages" component={MessagesScreen} />
       <Stack.Screen name="Profile" component={ProfileScreen} />
@@ -76,6 +79,9 @@ const AppNavigator = () => {
       <Stack.Screen name="FindDoctor" component={FindDoctorScreen} />
       <Stack.Screen name="LabTest" component={LabTestScreen} />
       <Stack.Screen name="BuyMedication" component={BuyMedicationScreen} />
+      <Stack.Screen name="PatientDetails" component={PatientDetailsScreen} />
+      <Stack.Screen name="Consultations" component={ConsultationsScreen} />
+      <Stack.Screen name="Professional" component={ProfessionalScreen} />
     </Stack.Navigator>
   );
 };

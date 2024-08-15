@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, ImageBackground, Alert } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, ImageBackground, StatusBar, Alert } from 'react-native';
 import { MaterialCommunityIcons, MaterialIcons } from '@expo/vector-icons';
 import authService from '../services/authService';
 import * as LocalAuthentication from 'expo-local-authentication';
 import Loader from '../../components/Loader';
+import styles from './style/loginStyle';
 
 const LoginScreen = ({ navigation, route }) => {
-  // const { role } = route.params;
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [rememberMe, setRememberMe] = useState(false);
@@ -37,36 +37,56 @@ const LoginScreen = ({ navigation, route }) => {
     } else {
       setEmailValid(true);
     }
-    
+  
     if (password === '') {
       setPasswordValid(false);
     } else {
       setPasswordValid(true);
     }
-
+  
     if (email === '' || password === '') {
       return; // Exit if validation fails
     }
-
+  
     setLoading(true); // Show loader
     try {
+      // Sign in and get token
       const userData = { email, password };
       const response = await authService.signIn(userData);
       const { token } = response;
-
-      const userDataResponse = await authService.getUserData(token);
-
+  
+      // Store token and fetch user data
       await authService.storeToken(token);
+      const userDataResponse = await authService.getUserData(token);
       await authService.storeUserData(userDataResponse);
-
-      navigation.replace('HomeScreen', { userData: userDataResponse });
+  
+      // Extract isVerified status from the user data
+      const { isVerified } = userDataResponse.data;
+  
+      if (!isVerified) {
+        // Send verification request if not verified
+        await authService.verifyAccount(email);
+  
+        // Notify the user and redirect them
+        Alert.alert('Verification Required', 'Please verify your account to proceed.');
+        
+        // Navigate to the verification screen
+        navigation.replace('VerifyOtp', {email} );
+      } else {
+        // Navigate to HomeScreen if verified
+        navigation.replace('HomeScreen', { userData: userDataResponse });
+      }
     } catch (error) {
       console.error(error);
-      Alert.alert('Login Error', 'Invalid credentials. Please try again.');
+      Alert.alert('Login Error', 'Invalid credentials or verification issue. Please try again.');
     } finally {
       setLoading(false); // Hide loader
     }
   };
+  
+  
+  
+  
 
   const authenticateWithFingerprint = async () => {
     try {
@@ -87,6 +107,7 @@ const LoginScreen = ({ navigation, route }) => {
       style={styles.backgroundImage}
     >
       <View style={styles.container}>
+        <StatusBar barStyle="light-content" backgroundColor="#00B4FE" />
         {loading && <Loader />}
         <TouchableOpacity onPress={() => navigation.goBack()} style={styles.backButton}>
           <MaterialIcons name="arrow-back-ios" size={20} color="#fff" style={{marginLeft: 5}} />
@@ -160,163 +181,5 @@ const LoginScreen = ({ navigation, route }) => {
     </ImageBackground>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  backgroundImage: {
-    flex: 1,
-    resizeMode: 'cover',
-    justifyContent: 'center',
-    backgroundColor: 'rgba(0, 180, 254, 0.99)',
-  },
-  backButton: {
-    position: 'absolute',
-    alignContent: 'center',
-    justifyContent: 'center',
-    top: 10,
-    left: 20,
-    borderRadius: 10,
-    padding: 4,
-    zIndex: 1,
-  },
-  titleContainer: {
-    paddingHorizontal: 20,
-    marginBottom: 20,
-  },
-  heading: {
-    fontSize: 28,
-    fontFamily: 'Montserrat',
-    color: '#fff',
-    textAlign: 'left',
-    marginTop: '60%',
-    marginBottom: 10,
-  },
-  createAccountButton: {
-    bottom: -60,
-    alignSelf: 'center',
-  },
-  createAccountText: {
-    color: '#00B4FE',
-    fontFamily: 'poppins-regular',
-    fontSize: 14,
-    bottom: 20,
-    textAlign: 'center',
-  },
-  subheading: {
-    fontSize: 15,
-    fontFamily: 'poppins-regular',
-    color: '#fff',
-    textAlign: 'left',
-  },
-  formContainer: {
-    backgroundColor: '#fff',
-    borderTopLeftRadius: 30,
-    borderTopRightRadius: 30,
-    paddingHorizontal: 20,
-    paddingTop: 30,
-    paddingBottom: 40,
-    width: '100%',
-    height: '88%',
-  },
-  inputContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginBottom: 10,
-    borderColor: '#00B4FE',
-    borderWidth: 1,
-    borderRadius: 15,
-  },
-  invalidInput: {
-    borderColor: 'red',
-  },
-  icon: {
-    marginLeft: 10,
-  },
-  input: {
-    flex: 1,
-    backgroundColor: '#fff',
-    padding: 13,
-    fontFamily: 'poppins-regular',
-    borderRadius: 15,
-  },
-  checkboxContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    marginBottom: 10,
-  },
-  checkbox: {
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  checkboxText: {
-    marginLeft: 10,
-    fontSize: 12,
-    fontFamily: 'poppins-regular',
-  },
-  forgotPasswordText: {
-    color: '#00B4FE',
-    fontFamily: 'poppins-regular',
-    fontSize: 13,
-  },
-  loginButton: {
-    backgroundColor: '#00B4FE',
-    padding: 15,
-    borderRadius: 10,
-    marginTop: 20,
-    alignItems: 'center',
-  },
-  buttonText: {
-    color: '#fff',
-    fontFamily: 'poppins-regular',
-    fontSize: 16,
-  },
-  separatorContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginVertical: 10,
-  },
-  separatorLine: {
-    flex: 1,
-    height: 1,
-    backgroundColor: '#ccc',
-  },
-  separatorText: {
-    marginHorizontal: 10,
-    color: '#999',
-    fontFamily: 'poppins-regular',
-  },
-  socialContainer: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    marginBottom: 20,
-    gap: 20,
-  },
-  socialButton: {
-    width: 90,
-    height: 50,
-    backgroundColor: '#fff',
-    borderWidth: 1,
-    borderColor: '#00B4FE',
-    borderRadius: 10,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  fingerprintButton: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginVertical: 10,
-  },
-  fingerprintText: {
-    marginLeft: 10,
-    color: '#00B4FE',
-    fontFamily: 'poppins-regular',
-  },
-});
 
 export default LoginScreen;
