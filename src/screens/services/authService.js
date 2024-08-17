@@ -10,6 +10,14 @@ const API_CONSULTATIONS = 'https://pronex.abdulfortech.com/doctor/consultations/
 const API_IS_VERIFIED = 'https://pronex.abdulfortech.com/doctor/user/isverified';
 const API_PROFESSIONAL_REGISTRATION = 'https://pronex.abdulfortech.com/doctor/kyc/profession-update';
 
+
+axios.defaults.headers.common['Authorization'] = `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiI5YzYyZWQ3NS03OTk1LTQyMWQtOTE1ZS03MjdkZGY3OTQyMjMiLCJqdGkiOiI0NTk2OWFmNjJiNTI4OGU2Zjc5ZWNlOWM4YTBmY2I0NDQ3ZjgyNzg3N2I3YTc5MmEyMDhmNzMyYjI3MjI4NjdmZTAxM2NmOTk2NWY4NjlhMSIsImlhdCI6MTcyMDA3NzgyNC42ODg3NjYsIm5iZiI6MTcyMDA3NzgyNC42ODg3NywiZXhwIjoxNzUxNjEzODIzLjgzNjc4Niwic3ViIjoiMSIsInNjb3BlcyI6W119.X81m9b4Se-aRBJEaYu3U86GZnwGIBPYIUe8HXpwzmd008b6J_KzWIB3haUobieesxdJzLIrpKdW8v8FXam4PSoqS3SrGkrr7Os2nsl0PpIzx3S5EBmYqCCV8vMqmB_D6GjtiZZPBEss-KpPoVIlTpU2xb2VZtMg-SjdXeZ_LX_SCb0r6GlihUheEgDZe3dSv5BlTKomP0jkOjX2vXc8grXhrF9hiKpjN9wGxZ5KIra5Att-M5Mk3N9Tba2WKxEZenjKMpEzlh92jspnhgzGSyxW-nhDAIvergV_wmkE5eQ93nj7wzvCNzLc0ziGjv177ycBbNJkOVe5i-TPFDGcq88NJXVA6CL4aZMb9aim6CkcBRh1q3wsKhcDcdh_F8n52OydXI828y9eYVHCsLVsJ2-pkx4mM41TMWdMqMl0lmfK9IrDinQn_BAZsDLKRVuUAIcpj3Ruwmdy4htG-Ng7H2hvQiVTo5xuRsKi-PywVyykdeX795Ou78-0RC8hiajJm4iyt3NwuaCTmD6_jlBRyiJXuUAmqoDb0LtFeRV8jGSgnLW8WJ3Cji8Xty2s6m91D-853NlWyInFuMtDBJihykOym6ccAgr_EGD5HbRREn-qZUXW9ebRkjpug8LmMx35fXPZ697GeOJMU7FXjaZchr319S3CRbftxACn8pJdXlw0`;
+const proTeken = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiI5YzYyZWQ3NS03OTk1LTQyMWQtOTE1ZS03MjdkZGY3OTQyMjMiLCJqdGkiOiI0NTk2OWFmNjJiNTI4OGU2Zjc5ZWNlOWM4YTBmY2I0NDQ3ZjgyNzg3N2I3YTc5MmEyMDhmNzMyYjI3MjI4NjdmZTAxM2NmOTk2NWY4NjlhMSIsImlhdCI6MTcyMDA3NzgyNC42ODg3NjYsIm5iZiI6MTcyMDA3NzgyNC42ODg3NywiZXhwIjoxNzUxNjEzODIzLjgzNjc4Niwic3ViIjoiMSIsInNjb3BlcyI6W119.X81m9b4Se-aRBJEaYu3U86GZnwGIBPYIUe8HXpwzmd008b6J_KzWIB3haUobieesxdJzLIrpKdW8v8FXam4PSoqS3SrGkrr7Os2nsl0PpIzx3S5EBmYqCCV8vMqmB_D6GjtiZZPBEss-KpPoVIlTpU2xb2VZtMg-SjdXeZ_LX_SCb0r6GlihUheEgDZe3dSv5BlTKomP0jkOjX2vXc8grXhrF9hiKpjN9wGxZ5KIra5Att-M5Mk3N9Tba2WKxEZenjKMpEzlh92jspnhgzGSyxW-nhDAIvergV_wmkE5eQ93nj7wzvCNzLc0ziGjv177ycBbNJkOVe5i-TPFDGcq88NJXVA6CL4aZMb9aim6CkcBRh1q3wsKhcDcdh_F8n52OydXI828y9eYVHCsLVsJ2-pkx4mM41TMWdMqMl0lmfK9IrDinQn_BAZsDLKRVuUAIcpj3Ruwmdy4htG-Ng7H2hvQiVTo5xuRsKi-PywVyykdeX795Ou78-0RC8hiajJm4iyt3NwuaCTmD6_jlBRyiJXuUAmqoDb0LtFeRV8jGSgnLW8WJ3Cji8Xty2s6m91D-853NlWyInFuMtDBJihykOym6ccAgr_EGD5HbRREn-qZUXW9ebRkjpug8LmMx35fXPZ697GeOJMU7FXjaZchr319S3CRbftxACn8pJdXlw0';
+
+
+
+
+
 const authService = {
   signUp: async (userData) => {
     try {
@@ -252,37 +260,23 @@ const authService = {
     }
   },
 
-registerProfessional: async (professionalData) => {
-  try {
-    const token = await AsyncStorage.getItem('authToken');
-    if (!token) {
-      throw new Error('No token found');
+  registerProfessional: async (professionalData) => {
+    try {
+      const response = await axios.post(
+        `${BASE_URL}/doctor/kyc/profession-update`,
+        professionalData,
+        {
+          headers: {
+            Authorization: `Bearer ${proTeken}`,
+            'Content-Type': 'application/json',
+          },
+        }
+      );
+      return response.data;
+    } catch (error) {
+      console.error('Registration error:', error.response ? error.response.data : error.message);
+      throw error;
     }
-
-    // Extract date components and format start_date
-    const { day, month, year } = professionalData.start_date || {};
-    if (day && month && year) {
-      professionalData.start_date = `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`;
-    } else {
-      // Handle case where date components are missing
-      throw new Error('Invalid start_date');
-    }
-
-    const response = await axios.post(
-      `${BASE_URL}/doctor/kyc/profession-update`,
-      professionalData,
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-          'Content-Type': 'application/json',
-        },
-      }
-    );
-    return response.data;
-  } catch (error) {
-    console.error('Registration error:', error.response ? error.response.data : error.message);
-    throw error;
-  }
 },
 
   

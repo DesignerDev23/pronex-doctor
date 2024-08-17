@@ -82,8 +82,8 @@ const styles = StyleSheet.create({
   },
   iconContainer: {
     marginRight: 10,
-    height: 40,
-    width: 40,
+    height: 35,
+    width: 35,
     right: 5,
     alignItems: 'center',
     justifyContent: 'center',

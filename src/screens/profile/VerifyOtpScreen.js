@@ -15,7 +15,7 @@ const VerifyOTPScreen = ({ route, navigation }) => {
     setLoading(true);
     const otpCode = otp.join('');
     try {
-      await authService.verifyOTP(email, otpCode, 'email', userData.idNumber); // Pass idNumber here
+      await authService.verifyOTP(email, otpCode, 'email'); // Pass idNumber here
       setLoading(false);
       navigation.navigate('HomeScreen');
     } catch (error) {

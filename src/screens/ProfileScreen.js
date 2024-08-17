@@ -48,68 +48,47 @@ const ProfileScreen = ({ route, navigation }) => {
           <View style={styles.groupContainer}>
           <TouchableOpacity style={styles.itemContainer} onPress={() => navigation.navigate('PersonalDetails', { userData })}>
               <View style={styles.iconContainer}>
-                <FontAwesome5 name="user-alt" size={24} color="#00B4FE" />
+                <FontAwesome5 name="user-alt" size={20} color="#00B4FE" />
               </View>
               <Text style={styles.title}>Personal Details</Text>
-              <MaterialCommunityIcons name="arrow-right" size={24} color="#00B4FE" />
+              <MaterialCommunityIcons name="arrow-right" size={20} color="#00B4FE" />
             </TouchableOpacity>
 
-
-            <TouchableOpacity style={styles.itemContainer} onPress={() => navigation.navigate('PaymentMethods')}>
-              <View style={styles.iconContainer}>
-                <MaterialIcons name="payment" size={24} color="#00B4FE" />
-              </View>
-              <Text style={styles.title}>Payment Methods</Text>
-              <MaterialCommunityIcons name="arrow-right" size={24} color="#00B4FE" />
-            </TouchableOpacity>
             
             <TouchableOpacity style={styles.itemContainer} onPress={() => navigation.navigate('MedicalRecords')}>
               <View style={styles.iconContainer}>
-                <FontAwesome5 name="clipboard-list" size={24} color="#00B4FE" />
+                <FontAwesome5 name="clipboard-list" size={20} color="#00B4FE" />
               </View>
               <Text style={styles.title}>Medical Records</Text>
-              <MaterialCommunityIcons name="arrow-right" size={24} color="#00B4FE" />
+              <MaterialCommunityIcons name="arrow-right" size={20} color="#00B4FE" />
             </TouchableOpacity>
 
-            <TouchableOpacity style={styles.itemContainer} onPress={() => navigation.navigate('MyAppointments')}>
+            <TouchableOpacity style={styles.itemContainer} onPress={() => navigation.navigate('Consultations')}>
               <View style={styles.iconContainer}>
-                <FontAwesome5 name="calendar-week" size={24} color="#00B4FE" />
+                <FontAwesome5 name="calendar-week" size={20} color="#00B4FE" />
               </View>
               <Text style={styles.title}>My Appointments</Text>
-              <MaterialCommunityIcons name="arrow-right" size={24} color="#00B4FE" />
+              <MaterialCommunityIcons name="arrow-right" size={20} color="#00B4FE" />
             </TouchableOpacity>
 
-            <TouchableOpacity style={styles.itemContainer} onPress={() => navigation.navigate('MyOrders')}>
-              <View style={styles.iconContainer}>
-                <MaterialCommunityIcons name="cart" size={24} color="#00B4FE" />
-              </View>
-              <Text style={styles.title}>My Orders</Text>
-              <MaterialCommunityIcons name="arrow-right" size={24} color="#00B4FE" />
-            </TouchableOpacity>
           </View>
 
           {/* Group 2: Saved Items - System Setting */}
           <View style={styles.groupContainer}>
-            <TouchableOpacity style={styles.itemContainer} onPress={() => navigation.navigate('SavedItems')}>
-              <View style={styles.iconContainer}>
-                <MaterialCommunityIcons name="bookmark" size={24} color="#00B4FE" />
-              </View>
-              <Text style={styles.title}>Saved Items</Text>
-              <MaterialCommunityIcons name="arrow-right" size={24} color="#00B4FE" />
-            </TouchableOpacity>
+
             <TouchableOpacity style={styles.itemContainer} onPress={() => navigation.navigate('HelpAndSupport')}>
               <View style={styles.iconContainer}>
-                <MaterialCommunityIcons name="face-agent" size={24} color="#00B4FE" />
+                <MaterialCommunityIcons name="face-agent" size={20} color="#00B4FE" />
               </View>
               <Text style={styles.title}>Help and Support</Text>
-              <MaterialCommunityIcons name="arrow-right" size={24} color="#00B4FE" />
+              <MaterialCommunityIcons name="arrow-right" size={20} color="#00B4FE" />
             </TouchableOpacity>
             <TouchableOpacity style={styles.itemContainer} onPress={() => navigation.navigate('SystemSetting')}>
               <View style={styles.iconContainer}>
-                <Ionicons name="settings" size={24} color="#00B4FE" />
+                <Ionicons name="settings" size={20} color="#00B4FE" />
               </View>
-              <Text style={styles.title}>System Setting</Text>
-              <MaterialCommunityIcons name="arrow-right" size={24} color="#00B4FE" />
+              <Text style={styles.title}>Change Password</Text>
+              <MaterialCommunityIcons name="arrow-right" size={20} color="#00B4FE" />
             </TouchableOpacity>
           </View>
 
@@ -117,38 +96,38 @@ const ProfileScreen = ({ route, navigation }) => {
           <View style={styles.groupContainer}>
             <TouchableOpacity style={styles.itemContainer} onPress={() => navigation.navigate('ScreenName')}>
               <View style={styles.iconContainer}>
-                <MaterialIcons name="bookmark" size={24} color="#00B4FE" />
+                <MaterialIcons name="bookmark" size={20} color="#00B4FE" />
               </View>
               <Text style={styles.title}>Terms & Condition</Text>
-              <MaterialCommunityIcons name="arrow-right" size={24} color="#00B4FE" />
+              <MaterialCommunityIcons name="arrow-right" size={20} color="#00B4FE" />
             </TouchableOpacity>
             <TouchableOpacity style={styles.itemContainer} onPress={() => navigation.navigate('ScreenName')}>
               <View style={styles.iconContainer}>
-                <MaterialIcons name="privacy-tip" size={24} color="#00B4FE" />
+                <MaterialIcons name="privacy-tip" size={20} color="#00B4FE" />
               </View>
               <Text style={styles.title}>Privacy Policy</Text>
-              <MaterialCommunityIcons name="arrow-right" size={24} color="#00B4FE" />
+              <MaterialCommunityIcons name="arrow-right" size={20} color="#00B4FE" />
             </TouchableOpacity>
             <TouchableOpacity style={styles.itemContainer} onPress={() => navigation.navigate('ScreenName')}>
               <View style={styles.iconContainer}>
-                <MaterialIcons name="medical-information" size={24} color="#00B4FE" />
+                <MaterialIcons name="medical-information" size={20} color="#00B4FE" />
               </View>
               <Text style={styles.title}>About Pronex Health</Text>
-              <MaterialCommunityIcons name="arrow-right" size={24} color="#00B4FE" />
+              <MaterialCommunityIcons name="arrow-right" size={20} color="#00B4FE" />
             </TouchableOpacity>
             <TouchableOpacity style={styles.itemContainer} onPress={() => navigation.navigate('ScreenName')}>
               <View style={styles.iconContainer}>
-                <MaterialIcons name="feedback" size={24} color="#00B4FE" />
+                <MaterialIcons name="feedback" size={20} color="#00B4FE" />
               </View>
               <Text style={styles.title}>Feedback</Text>
-              <MaterialCommunityIcons name="arrow-right" size={24} color="#00B4FE" />
+              <MaterialCommunityIcons name="arrow-right" size={20} color="#00B4FE" />
             </TouchableOpacity>
           </View>
 
           {/* Log Out */}
           <TouchableOpacity style={[styles.itemContainer, styles.logoutContainer]} onPress={handleLogout}>
             <View style={styles.iconContainer}>
-              <AntDesign name="logout" size={24} color="#C23534" />
+              <AntDesign name="logout" size={20} color="#C23534" />
             </View>
             <Text style={styles.logout}>Log Out</Text>
             <MaterialCommunityIcons name="arrow-right" size={23} color="#00B4FE" />
@@ -159,7 +138,7 @@ const ProfileScreen = ({ route, navigation }) => {
         <CustomBottomTabBar navigation={navigation} route={route} userDataResponse={userData} />
       </View>
       <View style={styles.header}>
-        <Octicons name="bell" size={24} color="#fff" style={styles.icon} />
+        <Octicons name="bell" size={20} color="#fff" style={styles.icon} />
       </View>
     </View>
   );

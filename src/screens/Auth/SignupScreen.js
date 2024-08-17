@@ -6,20 +6,20 @@ import authService from '../services/authService';
 import axios from 'axios';
 import { FontAwesome5, MaterialCommunityIcons, MaterialIcons } from '@expo/vector-icons';
 
-const SignupScreen = ({ navigation }) => {
+const SignupScreen = ({ navigation, token }) => {
   const [errorMessage, setErrorMessage] = useState('');
   const [modalVisible, setModalVisible] = useState(false);
   const [modalMessage, setModalMessage] = useState('');
   const [securePassword, setSecurePassword] = useState(true);
   const [secureConfirmPassword, setSecureConfirmPassword] = useState(true);
   const [formData, setFormData] = useState({
-    firstName: 'Musa',
-    lastName: 'Abdulkadir',
-    email: 'musa4@mailinator.com',
-    phone1: '09120480564',
-    password: 'abdullahi',
+    firstName: '',
+    lastName: '',
+    email: '',
+    phone1: '',
+    password: '',
     role: 'doctor',
-    password_confirmation: 'abdullahi', 
+    password_confirmation: '', 
   });
 
   const [validFields, setValidFields] = useState({
@@ -82,21 +82,14 @@ const SignupScreen = ({ navigation }) => {
   
     try {
       const response = await authService.signUp(formData);
-      console.log('Signup response:', response); // Log response for debugging
+      console.log('Signup response:', response);
   
-      // Adjust based on actual response structure
-      const token = response.token || response.data.token;
-      if (!token) {
-        throw new Error('Token not found in response');
-      }
-  
-      await authService.storeToken(token); // Store token using authService
-  
-      navigation.navigate('Professional'); // Redirect to Professional screen after Signup
+      // Navigate to the Login screen after successful signup
+      navigation.navigate('Professional');
     } catch (error) {
       console.error('Signup error:', error);
       if (error.response) {
-        console.error('Response data:', error.response.data); // Log detailed error
+        console.error('Response data:', error.response.data);
       }
       // Handle error state or display error message to user
     }

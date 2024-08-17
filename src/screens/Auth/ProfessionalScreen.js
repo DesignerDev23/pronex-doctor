@@ -7,7 +7,7 @@ const ProfessionalScreen = ({ navigation }) => {
   const [formData, setFormData] = useState({
     username: 'Designer',
     specialization: 'Dentists',
-    start_date: { day: '13', month: '08', year: '2024' },
+    start_date: '12/12/2003',
     license_number: '12WMSKJE',
     license_body: 'National doctors association',
     license_validity_from: '12/12/2013',
@@ -78,29 +78,15 @@ const ProfessionalScreen = ({ navigation }) => {
               onChangeText={(text) => setFormData({ ...formData, specialization: text })}
             />
           </View>
-          <View style={styles.dateInputContainer}>
+          <View style={styles.inputContainer}>
+            <MaterialCommunityIcons name="calendar" size={22} color="#00B4FE" style={styles.icon} />
             <TextInput
-              style={styles.dateInput}
-              placeholder="Day"
-              keyboardType="numeric"
-              maxLength={2}
-              onChangeText={(text) => setFormData({ ...formData, start_date: { ...formData.start_date, day: text } })}
-            />
-            <TextInput
-              style={styles.dateInput}
-              placeholder="Month"
-              keyboardType="numeric"
-              maxLength={2}
-              onChangeText={(text) => setFormData({ ...formData, start_date: { ...formData.start_date, month: text } })}
-            />
-            <TextInput
-              style={styles.dateInput}
-              placeholder="Year"
-              keyboardType="numeric"
-              maxLength={4}
-              onChangeText={(text) => setFormData({ ...formData, start_date: { ...formData.start_date, year: text } })}
+              style={styles.input}
+              placeholder="Start Date (dd/mm/yyyy)"
+              onChangeText={(text) => setFormData({ ...formData, start_date: text })}
             />
           </View>
+
           <View style={styles.inputContainer}>
             <MaterialCommunityIcons name="credit-card" size={22} color="#00B4FE" style={styles.icon} />
             <TextInput
